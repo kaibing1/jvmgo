@@ -8,3 +8,11 @@
 ### ch03
     字节码二进制解析
 -Xjre "/Users/mr.yang/Library/Java/JavaVirtualMachines/adopt-openjdk-1.8.0_292-1/Contents/Home/jre" java.lang.String
+
+### ch04
+    运行时数据
+
+### ch05
+    解释器
+go build
+./ch05 -Xjre "/Users/mr.yang/Library/Java/JavaVirtualMachines/adopt-openjdk-1.8.0_292-1/Contents/Home/jre" jvmgo.book.ch05.GaussTest

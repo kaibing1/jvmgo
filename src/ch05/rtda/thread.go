@@ -10,9 +10,6 @@ func NewThread() *Thread {
 		stack: newStack(2014),
 	}
 }
-func (self *Thread) NewFrame(maxLocals, maxStack uint) *Frame {
-	return NewFrame(maxLocals, maxStack)
-}
 
 func (self *Thread) PC() int {
 	return self.pc
@@ -32,4 +29,8 @@ func (self *Thread) PopFrame() *Frame {
 
 func (self *Thread) CurrentFrame() *Frame {
 	return self.stack.top()
+}
+
+func (self *Thread) NewFrame(maxLocals, maxStack uint) *Frame {
+	return NewFrame(self, maxLocals, maxStack)
 }
