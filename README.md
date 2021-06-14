@@ -16,3 +16,7 @@
     解释器
 go build
 ./ch05 -Xjre "/Users/mr.yang/Library/Java/JavaVirtualMachines/adopt-openjdk-1.8.0_292-1/Contents/Home/jre" jvmgo.book.ch05.GaussTest
+
+### ch06
+
+./ch06 -Xjre "/Users/mr.yang/Library/Java/JavaVirtualMachines/adopt-openjdk-1.8.0_292-1/Contents/Home/jre" jvmgo.book.ch06.MyObject
