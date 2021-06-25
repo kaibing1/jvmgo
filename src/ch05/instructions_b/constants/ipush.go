@@ -1,8 +1,8 @@
 package constants
 
 import (
-	"jvmgo/ch04/rtda"
 	"jvmgo/ch05/instructions/base"
+	"jvmgo/ch05/rtda"
 )
 
 type BIPUSH struct {
@@ -28,5 +28,5 @@ func (self *SIPUSH) FetchOperands(reader *base.BytecodeReader) {
 
 func (self *SIPUSH) Execute(frame *rtda.Frame) {
 	i := int32(self.val)
-	frame.OperandStack().PopInt(i)
+	frame.OperandStack().PushInt(i)
 }
