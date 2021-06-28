@@ -6,18 +6,24 @@ import (
 	"jvmgo/ch07/rtda/heap"
 )
 
-type GET_STATIC struct {
-	base.Index16Instruction
-}
+// Get static field from class
+type GET_STATIC struct{ base.Index16Instruction }
 
 func (self *GET_STATIC) Execute(frame *rtda.Frame) {
 	cp := frame.Method().Class().ConstantPool()
 	fieldRef := cp.GetConstant(self.Index).(*heap.FieldRef)
 	field := fieldRef.ResolvedField()
 	class := field.Class()
+	if !class.InitStarted() {
+		frame.RevertNextPC()
+		base.InitClass(frame.Thread(), class)
+		return
+	}
+
 	if !field.IsStatic() {
 		panic("java.lang.IncompatibleClassChangeError")
 	}
+
 	descriptor := field.Descriptor()
 	slotId := field.SlotId()
 	slots := class.StaticVars()

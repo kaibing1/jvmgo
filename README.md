@@ -20,3 +20,10 @@ go build
 ### ch06
 
 ./ch06 -Xjre "/Users/mr.yang/Library/Java/JavaVirtualMachines/adopt-openjdk-1.8.0_292-1/Contents/Home/jre" jvmgo.book.ch06.MyObject
+
+### ch07
+
+windows java path
+C:\Program Files\AdoptOpenJDK\jdk-8.0.292.10-hotspot\jre
+
+-Xjre "C:\Program Files\AdoptOpenJDK\jdk-8.0.292.10-hotspot\jre" jvmgo.book.ch07.InvokeDemo

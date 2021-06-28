@@ -6,9 +6,8 @@ import (
 	"jvmgo/ch07/rtda/heap"
 )
 
-type PUT_STATIC struct {
-	base.Index16Instruction
-}
+// Set static field in class
+type PUT_STATIC struct{ base.Index16Instruction }
 
 func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 	currentMethod := frame.Method()
@@ -17,6 +16,12 @@ func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 	fieldRef := cp.GetConstant(self.Index).(*heap.FieldRef)
 	field := fieldRef.ResolvedField()
 	class := field.Class()
+	if !class.InitStarted() {
+		frame.RevertNextPC()
+		base.InitClass(frame.Thread(), class)
+		return
+	}
+
 	if !field.IsStatic() {
 		panic("java.lang.IncompatibleClassChangeError")
 	}
@@ -25,10 +30,12 @@ func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 			panic("java.lang.IllegalAccessError")
 		}
 	}
+
 	descriptor := field.Descriptor()
 	slotId := field.SlotId()
 	slots := class.StaticVars()
 	stack := frame.OperandStack()
+
 	switch descriptor[0] {
 	case 'Z', 'B', 'C', 'S', 'I':
 		slots.SetInt(slotId, stack.PopInt())
@@ -37,8 +44,10 @@ func (self *PUT_STATIC) Execute(frame *rtda.Frame) {
 	case 'J':
 		slots.SetLong(slotId, stack.PopLong())
 	case 'D':
-		slots.SetLong(slotId, stack.PopLong())
+		slots.SetDouble(slotId, stack.PopDouble())
 	case 'L', '[':
 		slots.SetRef(slotId, stack.PopRef())
+	default:
+		// todo
 	}
 }
