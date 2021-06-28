@@ -39,7 +39,6 @@ func parseCmd() *Cmd {
 	}
 
 	return cmd
-
 }
 
 func printUsage() {

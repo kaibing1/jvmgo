@@ -24,6 +24,11 @@ func (self *MethodDescriptorParser) parse(descriptor string) *MethodDescriptor {
 	return self.parsed
 }
 
+func (self *MethodDescriptorParser) startParams() {
+	if self.readUint8() != '(' {
+		self.causePanic()
+	}
+}
 func (self *MethodDescriptorParser) endParams() {
 	if self.readUint8() != ')' {
 		self.causePanic()
@@ -31,12 +36,6 @@ func (self *MethodDescriptorParser) endParams() {
 }
 func (self *MethodDescriptorParser) finish() {
 	if self.offset != len(self.raw) {
-		self.causePanic()
-	}
-}
-
-func (self *MethodDescriptorParser) startParams() {
-	if self.readUint8() != '(' {
 		self.causePanic()
 	}
 }
@@ -50,9 +49,19 @@ func (self *MethodDescriptorParser) readUint8() uint8 {
 	self.offset++
 	return b
 }
-
 func (self *MethodDescriptorParser) unreadUint8() {
 	self.offset--
+}
+
+func (self *MethodDescriptorParser) parseParamTypes() {
+	for {
+		t := self.parseFieldType()
+		if t != "" {
+			self.parsed.addParameterType(t)
+		} else {
+			break
+		}
+	}
 }
 
 func (self *MethodDescriptorParser) parseReturnType() {
@@ -69,17 +78,6 @@ func (self *MethodDescriptorParser) parseReturnType() {
 	}
 
 	self.causePanic()
-}
-
-func (self MethodDescriptorParser) parseParamTypes() {
-	for {
-		t := self.parseFieldType()
-		if t != "" {
-			self.parsed.addParameterTypr(t)
-		} else {
-			break
-		}
-	}
 }
 
 func (self *MethodDescriptorParser) parseFieldType() string {
@@ -109,6 +107,7 @@ func (self *MethodDescriptorParser) parseFieldType() string {
 		return ""
 	}
 }
+
 func (self *MethodDescriptorParser) parseObjectType() string {
 	unread := self.raw[self.offset:]
 	semicolonIndex := strings.IndexRune(unread, ';')

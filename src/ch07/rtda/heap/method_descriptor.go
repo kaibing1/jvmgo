@@ -5,7 +5,7 @@ type MethodDescriptor struct {
 	returnType     string
 }
 
-func (self *MethodDescriptor) addParameterTypr(t string) {
+func (self *MethodDescriptor) addParameterType(t string) {
 	pLen := len(self.parameterTypes)
 	if pLen == cap(self.parameterTypes) {
 		s := make([]string, pLen, pLen+4)
