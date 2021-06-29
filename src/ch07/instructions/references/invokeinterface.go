@@ -11,7 +11,7 @@ type INVOKE_INTERFACE struct {
 }
 
 func (self *INVOKE_INTERFACE) FetchOperands(reader *base.BytecodeReader) {
-	self.index = uint(reader.ReadInt16())
+	self.index = uint(reader.ReadUint16())
 	reader.ReadUint8()
 	reader.ReadUint8()
 }
