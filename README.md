@@ -27,3 +27,5 @@ windows java path
 C:\Program Files\AdoptOpenJDK\jdk-8.0.292.10-hotspot\jre
 
 .\ch07.exe -Xjre "C:\\Program Files\\AdoptOpenJDK\\jdk-8.0.292.10-hotspot\\jre" jvmgo.book.ch07.InvokeDemo
+
+### ch08 
