@@ -30,3 +30,7 @@ C:\Program Files\AdoptOpenJDK\jdk-8.0.292.10-hotspot\jre
 
 ### ch08 
     .\ch08.exe -Xjre "C:\\Program Files\\AdoptOpenJDK\\jdk-8.0.292.10-hotspot\\jre" jvmgo.book.ch08.HelloWorld
+
+
+### ch09 
+    .\ch09.exe -Xjre "C:\\Program Files\\AdoptOpenJDK\\jdk-8.0.292.10-hotspot\\jre" jvmgo.book.ch09.StringTest
