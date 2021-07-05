@@ -34,3 +34,5 @@ C:\Program Files\AdoptOpenJDK\jdk-8.0.292.10-hotspot\jre
 
 ### ch09 
     .\ch09.exe -Xjre "C:\\Program Files\\AdoptOpenJDK\\jdk-8.0.292.10-hotspot\\jre" jvmgo.book.ch09.StringTest
+### ch10 异常处理
+    .\ch10.exe -Xjre "C:\\Program Files\\AdoptOpenJDK\\jdk-8.0.292.10-hotspot\\jre" jvmgo.book.ch10.ParseIntTest 123
